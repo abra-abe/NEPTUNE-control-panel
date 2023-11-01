@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Arduino Control Panel</title>
+  <style>
+    .controller {
+      display: flex;
+      /* justify-content: center; */
+      align-items: center;
+      align-content: center;
+      height: 200px;
+      width: 300px;
+      border: 2px solid #52b823
+      border-radius: 50%;
+    }
+    .button-row {
+      align-content: center;
+      display:grid;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    button {
+      height: 60px;
+      width: 60px;
+      border-radius: 50%;
+      font-size: 16px;
+    }
+    #button7 {
+      color: red;
+    }
+    #buttonCapture {
+      height: 60px;
+      width: 120px;
+      border-radius: 15%;
+    }
+    header {
+      /* background-image: url('/home/turtleg/Desktop/UNI SEASON 8 Series Finale/Project/control panel/sea.jpeg'); */
+      /* background-size: cover; */
+      background-color: rgb(28, 86, 194);
+      padding-top: 20px;
+      position: relative;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+<body bgcolor="rgb(28, 86, 194)">
+  <header>
+  <center><U><h1>N.E.P.T.U.N.E</h1></U></center>
+  <center><u><i><b>Navigational Exploration Probe for Tactical Underwater Navigation and Exploration</b></i></u></center>
+<center><h2>Control Panel</h2></center>
+</header>
+<center>
+  <div class="controller">
+    <div class="button-row">
+      <form action="/control/l" method="POST">
+        <button id="button5">←</button>
+      </form>
+    </div>
+    <div class="button-row">
+      <form action="/control/f" method="POST">
+        <button id="button3">↑</button>
+      </form>
+      <form action="/control/s" method="POST">
+        <button id="button7">Stop</button>
+      </form>
+      <form action="/control/b" method="POST">
+        <button id="button4">↓</button>
+      </form>
+    </div>
+    <div class="button-row">
+      <form action="/control/r" method="POST">
+        <button id="button6">→</button>
+      </form>
+    </div>
+    <div class="button-row">
+      <form action="/control/u" method="POST">
+        <button id="button2">up</button>
+      </form>
+      <form action="/control/d" method="POST">
+        <button id="button1">down</button>
+      </form>
+    </div>
+    <div class="button-row">
+     
+    </div>
+  </div>
+</center>
+<center>
+  <div>
+    <!-- put button here -->
+    <form action="/capture" method="get">
+      <button id="buttonCapture">Capture</button>
+    </form>
+  </div>
+</center>
+</body>
+</html>

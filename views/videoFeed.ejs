@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Live Video Feed</title>
+</head>
+<body>
+  <video id="videoPlayer" autoplay></video>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.3/socket.io.js"></script>
+  <script>
+    const socket = io();
+    const videoPlayer = document.getElementById('videoPlayer');
+
+    socket.on('videoFrame', (data) => {
+      // Append the received video frame to the video player
+      videoPlayer.srcObject = new MediaSource();
+      videoPlayer.srcObject.appendBuffer(data);
+    });
+
+    socket.on('videoEnd', () => {
+      // Handle the end of the video feed
+    });
+  </script>
+</body>
+</html>
