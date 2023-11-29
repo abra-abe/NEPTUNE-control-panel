@@ -94,6 +94,33 @@
       <button id="buttonCapture">Capture</button>
     </form>
   </div>
+  <center>
+    <!-- maps container -->
+    <!-- <button id="showMap" onclick="initMap()">Show Map</button> -->
+    <div id="map" style="height: 800px; width: 900px;"></div>
+  </center>
 </center>
+
+<!-- include the google maps API -->
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7cHB5q7yGAJ6IdAvOgrhcCns6zl43_nk&callback=initMap"></script>
+
+<script>
+  function initMap() {
+    console.log('initializing map...');
+    // Specify your initial map options
+    var mapOptions = {
+      center: {
+        lat: -34.397,
+        lng: 150.644
+      },
+      zoom: 15
+    };
+
+    // Create a new map
+    var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+  }
+
+  initMap();
+</script>
 </body>
 </html>

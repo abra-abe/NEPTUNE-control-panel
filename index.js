@@ -32,7 +32,7 @@ var options = {
     delay: 1,
     saveShots: true,
     output: 'jpeg',
-    device: '/dev/video0',
+    device: '/dev/video2',
     callbackReturn: 'location'
 };
 
