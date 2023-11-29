@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const axios = require('axios');
@@ -69,7 +70,7 @@ app.set('view-engine', 'ejs');
 
 // routes
 app.get('/control', (req, res) => {
-    res.render('controlPanel.ejs')
+    res.render('controlPanel.ejs', {apikey: process.env.MAPS_API})
 })
 
 app.post('/control/:input', async (req, res) => {
