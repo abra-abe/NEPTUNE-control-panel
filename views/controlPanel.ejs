@@ -93,6 +93,7 @@
     <form action="/capture" method="get">
       <button id="buttonCapture">Capture</button>
     </form>
+   Map
   </div>
   <center>
     <!-- maps container -->
@@ -105,21 +106,57 @@
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=<%= apikey %>&callback=initMap"></script>
 
 <script>
-  function initMap() {
+  async function initMap() {
+  const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary(
+    "marker",
+  );
+
     console.log('initializing map...');
     // Specify your initial map options
     var mapOptions = {
       center: {
-        lat: -34.397,
-        lng: 150.644
+        lat: <%= lat %>,
+        lng: <%= lng %>
       },
       zoom: 15
     };
 
     // Create a new map
-    var map = new google.maps.Map(document.getElementById('map'), mapOptions);
-  }
+    const map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
+    //creating a marker
+    const markPoint = [
+      {
+        position: {lat: -6.7939507, lng: 39.091095},
+        title: 'Current Position'
+      }
+    ];
+    //creating an info window
+    const infoWindow = new InfoWindow();
+
+    // Create the markers.
+  markPoint.forEach(({ position, title }, i) => {
+    const pin = new PinElement({
+      glyph: `${i + 1}`,
+    });
+    const marker = new AdvancedMarkerElement({
+      position,
+      map,
+      title: `${i + 1}. ${title}`,
+      content: pin.element,
+    });
+        // Add a click listener for each marker, and set up the info window.
+        marker.addListener("click", ({ domEvent, latLng }) => {
+      const { target } = domEvent;
+
+      infoWindow.close();
+      infoWindow.setContent(marker.title);
+      infoWindow.open(marker.map, marker);
+    });
+  });
+
+
+  }
   initMap();
 </script>
 </body>

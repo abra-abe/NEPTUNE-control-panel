@@ -9,16 +9,22 @@ const path = require('path');
 const PORT = 7895;
 
 // requiring and setting up serial port
-const SerialPort = require('serialport');
-const { ppid } = require('process');
-const Readline = SerialPort.parsers.Readline;
+// const SerialPort = require('serialport');
+// const { ppid } = require('process');
+// const Readline = SerialPort.parsers.Readline;
 const portName = '/dev/ttyUSB0';
 const baudRate = 9600;
 
-const arduinoPort = new SerialPort(portName, {baudRate});
-const parser = new Readline({ delimeter: '\r\n' });
-arduinoPort.pipe(parser);
+let arduinoPort = null;
 
+try {
+    const arduinoPort = new SerialPort(portName, {baudRate});
+    const parser = new Readline({ delimeter: '\r\n' });
+    arduinoPort.pipe(parser);
+}catch(err) {
+    console.error(`Error occured while initializing port: ${err}`);
+    console.error('Make sure the Arduino is connected and the port is correct.');
+}
 // configuring parser
 app.use(express.urlencoded({extended: true}));
 
@@ -70,7 +76,9 @@ app.set('view-engine', 'ejs');
 
 // routes
 app.get('/control', (req, res) => {
-    res.render('controlPanel.ejs', {apikey: process.env.MAPS_API})
+    const longitude = 39.0910;
+    const latitude = -6.79395;
+    res.render('controlPanel.ejs', {apikey: process.env.MAPS_API, lng: longitude, lat: latitude})
 })
 
 app.post('/control/:input', async (req, res) => {
